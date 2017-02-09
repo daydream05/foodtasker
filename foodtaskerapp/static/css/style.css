@@ -8,6 +8,10 @@ body {
     background-color: #3F3F63;
 }
 
+.bg-gray {
+    background-color: #88A1B2;
+}
+
 .text-white {
     color: white;
 }
@@ -108,4 +112,14 @@ body {
 
 .content .panel {
     border: 0;
+}
+
+.table > thead > tr > th,
+.table > thead > tr > td, {
+    vertical-align: middle;
+}
+
+.table,
+.table > thead > tr > th {
+    border-color: #88A1B2
 }
