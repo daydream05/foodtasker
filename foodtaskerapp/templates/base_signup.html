@@ -3,13 +3,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home page</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 <body>
-    Hello Python!
+
+    {% block heading %}{% endblock %}
+    {% block content %}{% endblock %}
+
 </body>
 </html>
