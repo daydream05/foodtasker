@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from foodtaskerapp.forms import UserForm, RestaurantForm, UserFormForEdit
+from foodtaskerapp.forms import UserForm, RestaurantForm, UserFormForEdit, MealForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -42,7 +42,20 @@ def restaurant_meal(request):
 
 @login_required(login_url='/restaurant/sign-in/')
 def restaurant_add_meal(request):
-    return render(request, 'restaurant/add_meal.html')
+    form = MealForm()
+
+    if request.method == "POST":
+        form = MealForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            # Don't save the form until restaurant is assigned to a meal.
+            meal = form.save(commit=False)
+            meal.restaurant = request.user.restaurant
+            meal.save()
+
+            return redirect(restaurant_meal)
+
+    return render(request, 'restaurant/add_meal.html', {"meal_form": form})
 
 
 @login_required(login_url='/restaurant/sign-in/')
